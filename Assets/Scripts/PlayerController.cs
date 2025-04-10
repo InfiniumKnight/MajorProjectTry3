@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleHealth(float enemyDamage)
+    public void HandleHealth(float enemyDamage)
     {
         currentHealth -= enemyDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, health); //Make sure health doesn't go below zero
