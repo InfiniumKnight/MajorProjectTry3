@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 0
+  enemyHealth: 30
+  experience: {fileID: 538868787171105893, guid: 204ace12e2e29ec48bb004f8cdbb9895, type: 3}
+  coin: {fileID: 973028809628856185, guid: 3a5b57a5cc3048b4783d4acaf331c031, type: 3}
 --- !u!114 &7079300320316333615
 MonoBehaviour:
   m_ObjectHideFlags: 0
