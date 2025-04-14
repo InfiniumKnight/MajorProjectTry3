@@ -13,10 +13,11 @@ public class Enemy3 : MonoBehaviour
     private PlayerController playerController = null;
 
     private int time = 0;
+    private int currentTime = 0;
     private int boostMultiplier = 5;
 
     [SerializeField]
-    private int kamikazeDamage = 100;
+    private int kamikazeDamage = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +31,11 @@ public class Enemy3 : MonoBehaviour
     {
         time = Mathf.RoundToInt(Time.time);
 
+        currentTime -= time;
+
         if (timeUntilBoost == 0)
         {
-            
+            timeUntilBoost = 5;
             speedBoost();
         }
         
@@ -47,11 +50,10 @@ public class Enemy3 : MonoBehaviour
     {
 
         GetComponent<NavMeshAgent>().speed *= boostMultiplier;
-        boostTime -= Time.deltaTime;
+        boostTime -= time;
         Debug.Log("Boost activated!");
 
     }
-
 
 }
 
