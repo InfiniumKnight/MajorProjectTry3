@@ -50,8 +50,16 @@ public class PlayerController : MonoBehaviour
 
         if (movement != Vector3.zero)
         {
-            animator.SetBool("isRunning", true);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+            try
+            {
+                animator.SetBool("isRunning", true);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+            }
+            catch (System.NullReferenceException exception)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+                Debug.Log("animator is missing" + exception.ToString());
+            }
         }
         else
         {
