@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int GunLevel;
     [SerializeField] private int BombLevel;
 
+    public delegate void PlayerEventHandler();
+    public event PlayerEventHandler OnPlayerDeath;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
@@ -81,6 +84,7 @@ public class PlayerController : MonoBehaviour
     private void PlayerDie()
     {
         Debug.Log("Player has died!");
+        OnPlayerDeath?.Invoke();
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
     }
 
