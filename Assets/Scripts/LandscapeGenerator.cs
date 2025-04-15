@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(MeshFilter))]
 public class LandscapeGenerator : MonoBehaviour
@@ -17,6 +19,7 @@ public class LandscapeGenerator : MonoBehaviour
     float xOffset;
     float zOffset;
     MeshCollider LandscapeCollision;
+    NavMeshSurface LandscapeNav;
 
     // Start is called before the first frame update
     void Start()
@@ -88,9 +91,16 @@ public class LandscapeGenerator : MonoBehaviour
 
         LandscapeCollision = gameObject.GetComponent<MeshCollider>();
         if(LandscapeCollision == null)
-            LandscapeCollision = gameObject.AddComponent<MeshCollider>();
+        {
+                LandscapeCollision = gameObject.AddComponent<MeshCollider>();
+        }
         LandscapeCollision.sharedMesh = LandscapeMesh;
 
-        
+        LandscapeNav = gameObject.GetComponent<NavMeshSurface>();
+        if (LandscapeNav == null)
+        {
+            LandscapeNav = gameObject.AddComponent<NavMeshSurface>();
+        }
+        LandscapeNav.BuildNavMesh();
     }
 }
