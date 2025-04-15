@@ -119,6 +119,14 @@ public class LandscapeGenerator : MonoBehaviour
             new UnityEngine.Vector3(HalfWidth,HalfHeight,0),
         };
 
+        UnityEngine.Vector3[] WallVisualScales = 
+        {
+            new UnityEngine.Vector3(xSize,Height,1f),
+            new UnityEngine.Vector3(xSize,Height,1f),
+            new UnityEngine.Vector3(zSize,Height,1f),
+            new UnityEngine.Vector3(zSize,Height,1f),
+        };
+
         UnityEngine.Quaternion[] WallVisualRotations =
         {
             UnityEngine.Quaternion.Euler(0,0,0),
@@ -133,9 +141,9 @@ public class LandscapeGenerator : MonoBehaviour
             WallCollision.transform.position = WallPositions[i];
             WallCollision.transform.localScale = WallScales[i];
             WallCollision.GetComponent<MeshRenderer>().enabled = false;
-
+            
             GameObject WallVisual = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            WallVisual.transform.localScale = new UnityEngine.Vector3(xSize,Height,1f);
+            WallVisual.transform.localScale = WallVisualScales[i];
             WallVisual.transform.position = WallVisualPositions[i];
             WallVisual.transform.rotation = WallVisualRotations[i];
             WallVisual.GetComponent<MeshRenderer>().material.color = new Color(1,0.3f,1,0.8f);
@@ -164,8 +172,9 @@ public class LandscapeGenerator : MonoBehaviour
         {
             LandscapeNav = gameObject.AddComponent<NavMeshSurface>();
         }
+        LandscapeNav.collectObjects = CollectObjects.Volume;
         LandscapeNav.center = new UnityEngine.Vector3(0,0,0);
-        LandscapeNav.size = new UnityEngine.Vector3(xSize - ExtraLandscapeSize,30f,zSize - ExtraLandscapeSize);
+        LandscapeNav.size = new UnityEngine.Vector3(xSize,30f,zSize);
         LandscapeNav.BuildNavMesh();
     }
 }
