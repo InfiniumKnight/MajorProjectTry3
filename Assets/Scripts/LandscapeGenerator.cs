@@ -14,6 +14,7 @@ public class LandscapeGenerator : MonoBehaviour
     int[] triangles;
     UnityEngine.Vector2[] uvs;
     Mesh LandscapeMesh;
+    private int ExtraLandscapeSize = 150;
     public int xSize;
     public int zSize;
     float xOffset;
@@ -32,11 +33,14 @@ public class LandscapeGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = LandscapeMesh;
 
         CreateLandscape();
+        CreateBoundingWalls();
         UpdateMesh();
     }
     
     void CreateLandscape()
     {
+        xSize += ExtraLandscapeSize;
+        zSize += ExtraLandscapeSize;
         vertices = new UnityEngine.Vector3[(xSize + 1) * (zSize + 1)];
 
         for (int i = 0, z = 0; z <= zSize; z++)
@@ -81,6 +85,65 @@ public class LandscapeGenerator : MonoBehaviour
         }
     }
 
+    void CreateBoundingWalls()
+    {
+        xSize -= ExtraLandscapeSize;
+        zSize -= ExtraLandscapeSize;
+        int Height = 20;
+        float Thickness = 100f;
+        float HalfWidth = xSize / 2f;
+        float HalfLength = zSize / 2f;
+        float HalfHeight = Height / 2f;
+
+        UnityEngine.Vector3[] WallPositions = 
+        {
+            new UnityEngine.Vector3(0,HalfHeight,-HalfLength - Thickness / 2f),
+            new UnityEngine.Vector3(0,HalfHeight, HalfLength + Thickness / 2f),
+            new UnityEngine.Vector3(-HalfWidth - Thickness / 2f, HalfHeight, 0),
+            new UnityEngine.Vector3(HalfWidth + Thickness / 2f, HalfHeight, 0),
+        };
+
+        UnityEngine.Vector3[] WallScales = 
+        {
+            new UnityEngine.Vector3(xSize + Thickness * 2f, Height, Thickness),
+            new UnityEngine.Vector3(xSize + Thickness * 2f, Height, Thickness),
+            new UnityEngine.Vector3(Thickness, Height, zSize + Thickness * 2f),
+            new UnityEngine.Vector3(Thickness, Height, zSize + Thickness * 2f),
+        };
+
+        UnityEngine.Vector3[] WallVisualPositions = 
+        {
+            new UnityEngine.Vector3(0,HalfHeight,HalfLength),
+            new UnityEngine.Vector3(0,HalfHeight,-HalfLength),
+            new UnityEngine.Vector3(-HalfWidth,HalfHeight,0),
+            new UnityEngine.Vector3(HalfWidth,HalfHeight,0),
+        };
+
+        UnityEngine.Quaternion[] WallVisualRotations =
+        {
+            UnityEngine.Quaternion.Euler(0,0,0),
+            UnityEngine.Quaternion.Euler(0,0,0),
+            UnityEngine.Quaternion.Euler(0,-90,0),
+            UnityEngine.Quaternion.Euler(0,90,0),
+        };
+
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject WallCollision = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            WallCollision.transform.position = WallPositions[i];
+            WallCollision.transform.localScale = WallScales[i];
+            WallCollision.GetComponent<MeshRenderer>().enabled = false;
+
+            GameObject WallVisual = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            WallVisual.transform.localScale = new UnityEngine.Vector3(xSize,Height,1f);
+            WallVisual.transform.position = WallVisualPositions[i];
+            WallVisual.transform.rotation = WallVisualRotations[i];
+            WallVisual.GetComponent<MeshRenderer>().material.color = new Color(1,0.3f,1,0.8f);
+            WallVisual.GetComponent<MeshRenderer>().material.shader = Shader.Find("Transparent/Diffuse");
+        }
+        
+    }
+
     void UpdateMesh()
     {
         LandscapeMesh.Clear();
@@ -101,6 +164,8 @@ public class LandscapeGenerator : MonoBehaviour
         {
             LandscapeNav = gameObject.AddComponent<NavMeshSurface>();
         }
+        LandscapeNav.center = new UnityEngine.Vector3(0,0,0);
+        LandscapeNav.size = new UnityEngine.Vector3(xSize - ExtraLandscapeSize,30f,zSize - ExtraLandscapeSize);
         LandscapeNav.BuildNavMesh();
     }
 }
