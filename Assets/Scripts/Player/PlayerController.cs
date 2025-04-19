@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
     public float health = 100f; //Max health
     private float currentHealth; //Current player health
     public Slider healthBar; //Setting up health bar UI
+    public float chipSpeed = 2.0f;
+    private float lerpTimer;
+
+    public Image frontHealthBar;
+    public Image backHealthBar;
 
     [Header("Weapon Levels")]
     [SerializeField] private int SwordLevel;
@@ -37,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         movePlayer();
-        //UpdateHealthUI();
+        UpdateHealthUI();
     }
 
     private void FixedUpdate()
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= enemyDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, health); //Make sure health doesn't go below zero
+        lerpTimer = 0f;
 
         if (currentHealth <= 0)
         {
@@ -90,9 +96,33 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        if (healthBar != null)
+        float fillF = frontHealthBar.fillAmount;
+        float fillB = backHealthBar.fillAmount;
+        float hFraction = currentHealth / health;
+        if (fillB > hFraction)
         {
-            healthBar.value = currentHealth / health; //Update the health bar UI with the percentage
+            frontHealthBar.fillAmount = hFraction;
+            backHealthBar.color = Color.red;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
+        if (fillF < hFraction)
+        {
+            backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = hFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
+        }
+    }
+
+    public void RestoreHealth(float healAmount)
+    {
+        currentHealth += healAmount;
+        lerpTimer = 0f;
+        currentHealth = health;
     }
 }
