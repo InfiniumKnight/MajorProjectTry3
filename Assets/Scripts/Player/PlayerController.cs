@@ -22,9 +22,9 @@ public class PlayerController : MonoBehaviour
     public Image backHealthBar;
 
     [Header("Weapon Levels")]
-    [SerializeField] private int SwordLevel;
-    [SerializeField] private int GunLevel;
-    [SerializeField] private int BombLevel;
+    [SerializeField] public int SwordLevel;
+    [SerializeField] public int GunLevel;
+    [SerializeField] public int BombLevel;
 
     public delegate void PlayerEventHandler();
     public event PlayerEventHandler OnPlayerDeath;

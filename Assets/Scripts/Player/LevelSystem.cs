@@ -16,6 +16,8 @@ public class LevelSystem : MonoBehaviour
     public Image frontXPBar;
     public Image backXPBar;
 
+    public GameObject player;
+
     public float healAmount;
 
     private void Start()
@@ -60,6 +62,6 @@ public class LevelSystem : MonoBehaviour
         frontXPBar.fillAmount = 0f;
         backXPBar.fillAmount = 0f;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
-        GetComponent<PlayerController>().RestoreHealth(healAmount);
+        player.GetComponent<PlayerController>().RestoreHealth(healAmount);
     }
 }

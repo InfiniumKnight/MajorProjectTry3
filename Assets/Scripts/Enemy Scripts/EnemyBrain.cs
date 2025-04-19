@@ -5,7 +5,8 @@ public class EnemyBrain : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public static event Action<enemyDeath> EnemyDeathEvent; //Trying to make enemy death an event for drops
+    public delegate void EnemyEventHandler();
+    public static event EnemyEventHandler EnemyDeathEvent; //Trying to make enemy death an event for drops
 
     //Sets up the enemy to find the player and be able to damage them
     private GameObject player = null;
@@ -29,12 +30,13 @@ public class EnemyBrain : MonoBehaviour
         agent.SetDestination(player.transform.position); //Updates the players position every frame, allows for tracking
     }
 
-    public void EnemyHealthHandler()
-    { 
-        
+    public void EnemyHealthHandler(int damageTaken)
+    {
+        enemyHealth -= damageTaken;
+
         if (enemyHealth <= 0)
         {
-            EnemyDeathEvent?.Invoke(this);
+            EnemyDeathEvent?.Invoke();
         }
 
     }
