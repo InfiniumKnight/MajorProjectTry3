@@ -23,7 +23,7 @@ public class Enemy3 : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Enemy3 : MonoBehaviour
 
         currentTime -= time;
 
-        if (timeUntilBoost == 0)
+        if (timeUntilBoost <= 0)
         {
             timeUntilBoost = 5;
             speedBoost();
@@ -41,10 +41,16 @@ public class Enemy3 : MonoBehaviour
         
     }
 
-    private void kamikaze()
-    { 
-        
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerController.HandleHealth(kamikazeDamage);
+            Destroy(gameObject);
+        }
     }
+
+
 
     private void speedBoost()
     {

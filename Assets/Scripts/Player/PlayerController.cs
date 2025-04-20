@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         currentHealth -= enemyDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0f, health); //Make sure health doesn't go below zero
         lerpTimer = 0f;
-
+        Debug.Log("Health is at " + currentHealth);
         if (currentHealth <= 0)
         {
             PlayerDie();

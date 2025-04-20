@@ -22,6 +22,7 @@ public class EnemyBrain : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
         enemyHealth = enemyMaxHealth;
     }
 
@@ -39,6 +40,14 @@ public class EnemyBrain : MonoBehaviour
             EnemyDeathEvent?.Invoke();
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerController.HandleHealth(enemyDamage);
+        }
     }
 
 

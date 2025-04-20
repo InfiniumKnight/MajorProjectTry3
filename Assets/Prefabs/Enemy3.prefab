@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 0
+  enemyMaxHealth: 30
 --- !u!114 &8451321367751039790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,4 +186,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostTime: 2
   timeUntilBoost: 5
-  kamikazeDamage: 100
+  kamikazeDamage: 50
