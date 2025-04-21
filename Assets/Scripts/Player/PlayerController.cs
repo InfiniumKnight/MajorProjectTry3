@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         movePlayer();
-        UpdateHealthUI();
+        //UpdateHealthUI();
     }
 
     private void FixedUpdate()
