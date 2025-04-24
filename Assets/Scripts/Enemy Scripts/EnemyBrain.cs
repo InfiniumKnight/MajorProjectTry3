@@ -16,6 +16,8 @@ public class EnemyBrain : MonoBehaviour
     public int enemyMaxHealth = 30;
     private int enemyHealth;
 
+    [SerializeField]
+    private GameObject coin;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +40,8 @@ public class EnemyBrain : MonoBehaviour
         if (enemyHealth <= 0)
         {
             EnemyDeathEvent?.Invoke();
+            Instantiate (coin, transform.position, coin.transform.rotation);
+            Destroy(gameObject);
         }
 
     }
@@ -49,6 +53,5 @@ public class EnemyBrain : MonoBehaviour
             playerController.HandleHealth(enemyDamage);
         }
     }
-
 
 }
