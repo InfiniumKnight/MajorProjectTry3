@@ -5,9 +5,6 @@ public class EnemyBrain : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public delegate void EnemyEventHandler();
-    public static event EnemyEventHandler EnemyDeathEvent; //Trying to make enemy death an event for drops
-
     //Sets up the enemy to find the player and be able to damage them
     private GameObject player = null;
     private PlayerController playerController = null; 
@@ -31,16 +28,21 @@ public class EnemyBrain : MonoBehaviour
     private void Update()
     {
         agent.SetDestination(player.transform.position); //Updates the players position every frame, allows for tracking
+        
+        EnemyHealthHandler(1);
     }
 
+    //Allows enemy to take damage, also has a 5% drop rate for coins
     public void EnemyHealthHandler(int damageTaken)
     {
         enemyHealth -= damageTaken;
 
         if (enemyHealth <= 0)
         {
-            EnemyDeathEvent?.Invoke();
-            Instantiate (coin, transform.position, coin.transform.rotation);
+            if ((Random.Range(0, 20)) == 1)
+            {
+                Instantiate(coin, transform.position, coin.transform.rotation);
+            }
             Destroy(gameObject);
         }
 

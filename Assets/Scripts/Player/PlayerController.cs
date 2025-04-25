@@ -29,9 +29,23 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerEventHandler();
     public event PlayerEventHandler OnPlayerDeath;
 
+    public int coinAmount = 0; // Sets the coin amount of the player to 0
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
+    }
+
+    //Subscribes the player to the coin counter event when placed in the level
+    private void Awake()
+    {
+        Coin.Coined += CoinCounter;
+    }
+
+    //Unsubscribes the player to the coin counter event when killed or scene changes
+    private void OnDestroy()
+    {
+        Coin.Coined -= CoinCounter;
     }
 
     private void Start()
@@ -124,5 +138,12 @@ public class PlayerController : MonoBehaviour
         currentHealth += healAmount;
         lerpTimer = 0f;
         currentHealth = health;
+    }
+
+    //Adds a coin to the players amount
+    private void CoinCounter() 
+    {
+        coinAmount++;
+        Debug.Log(coinAmount);
     }
 }

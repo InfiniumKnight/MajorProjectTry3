@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Coin : MonoBehaviour
 {
@@ -17,13 +18,16 @@ public class Coin : MonoBehaviour
     [SerializeField]
     private float extraHeight = 2;
 
+    public delegate void CoinPickedUp();
+    public static event CoinPickedUp Coined;
+
     // Start is called before the first frame update
     void Start()
     {
        
     }
 
-    // Update is called once per frame
+    // Has the coin float up and down, as well as rotate
     void Update()
     {
         transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
@@ -34,24 +38,14 @@ public class Coin : MonoBehaviour
         transform.position = new Vector3(pos.x, (newY * height), pos.z);
     }
 
-
+    //Adds a coin to the players inventory when they come into contact, and destroys the coin
     private void OnCollisionEnter (Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-
+            Coined.Invoke();
             Destroy(gameObject);
         }
-    }
-
-    private void OnEnable ()
-    {
-
-    }
-
-    private void OnDisable ()
-    {
-
     }
 
 }

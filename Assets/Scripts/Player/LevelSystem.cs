@@ -20,6 +20,22 @@ public class LevelSystem : MonoBehaviour
 
     public float healAmount;
 
+
+    private void Awake()
+    {
+        Enemy1.EnemyExp1 += Exp1;
+        Enemy2.EnemyExp2 += Exp2;
+        Enemy3.EnemyExp3 += Exp3;
+    }
+
+    //Unsubscribes the player to the coin counter event when killed or scene changes
+    private void OnDestroy()
+    {
+        Enemy1.EnemyExp1 -= Exp1;
+        Enemy2.EnemyExp2 -= Exp2;
+        Enemy3.EnemyExp3 -= Exp3;
+    }
+
     private void Start()
     {
         frontXPBar.fillAmount = currentXP / requiredXP;
@@ -64,4 +80,22 @@ public class LevelSystem : MonoBehaviour
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
         player.GetComponent<PlayerController>().RestoreHealth(healAmount);
     }
+
+    private void Exp1()
+    {
+        currentXP = currentXP + 10;
+    }
+
+    private void Exp2()
+    {
+        currentXP = currentXP + 20;
+    }
+
+    private void Exp3()
+    {
+        currentXP = currentXP + 50;
+    }
+
+
+
 }

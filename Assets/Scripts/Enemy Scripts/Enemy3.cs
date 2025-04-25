@@ -9,6 +9,8 @@ public class Enemy3 : MonoBehaviour
     [SerializeField]
     private int timeUntilBoost = 5;
 
+    private bool playerKilled;
+
     private GameObject player = null;
     private PlayerController playerController = null;
 
@@ -19,11 +21,17 @@ public class Enemy3 : MonoBehaviour
     [SerializeField]
     private int kamikazeDamage = 50;
 
+    public ParticleSystem explosion;
+
+    public delegate void EnemyDeathExp3();
+    public static event EnemyDeathExp3 EnemyExp3;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
+        playerKilled = true;
     }
 
     // Update is called once per frame
@@ -47,6 +55,7 @@ public class Enemy3 : MonoBehaviour
         {
             playerController.HandleHealth(kamikazeDamage);
             Destroy(gameObject);
+            playerKilled = false;
         }
     }
 
@@ -61,5 +70,12 @@ public class Enemy3 : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        if (playerKilled == true)
+        {
+            EnemyExp3.Invoke();
+        }
+    }
 }
 
