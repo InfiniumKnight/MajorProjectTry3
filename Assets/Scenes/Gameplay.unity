@@ -651,7 +651,7 @@ MonoBehaviour:
   damage: 20
   pistol: {fileID: 1930449875}
   Target: {fileID: 0}
-  projectilePrefab: {fileID: 4664967820460785111, guid: 82b4cab139fd4a944b43230190fa57ba, type: 3}
+  projectilePrefab: {fileID: 1869309086365228175, guid: 177a7a8ff37132b40a61d6100b2ad83e, type: 3}
   player: {fileID: 2000124605}
 --- !u!54 &1930449877
 Rigidbody:
@@ -849,11 +849,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 283688573158150983, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: GunLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 283688573158150983, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: BombLevel
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 283688573158150983, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: SwordLevel
