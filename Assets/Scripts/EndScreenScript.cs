@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndScreenScript : MonoBehaviour
 {
-    public void BackToMainMenu()
+    /*public void BackToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
@@ -19,5 +19,5 @@ public class EndScreenScript : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 }
