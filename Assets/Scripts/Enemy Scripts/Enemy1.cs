@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
+    public delegate void EnemyDeathExp1();
+    public static event EnemyDeathExp1 EnemyExp1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +19,10 @@ public class Enemy1 : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        EnemyExp1.Invoke();
+    }
+
 }

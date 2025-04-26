@@ -6,10 +6,15 @@ public class EnemySpawning : MonoBehaviour
 {
     private float startTime;
     private int gameLength;
+
     private int spawnRateEnemy1 = 0;
     private int spawnRateEnemy2 = 0;
     private int spawnRateEnemy3 = 0;
     private int enemySpawnRate = 0;
+
+    private int[] enemyExperience = { 100, 75, 50 }; //Finish setting up randomization of drops
+    private int[] enemyCoin = { 100, 75, 50 };
+
     private bool isGamePaused = false;
     public GameObject enemy1;
     public GameObject enemy2;
@@ -83,10 +88,8 @@ public class EnemySpawning : MonoBehaviour
             }
 
             enemySpawnRate++;
+
         }
-
-
-
     }
 
     private void spawnRateIncrease()
@@ -122,5 +125,15 @@ public class EnemySpawning : MonoBehaviour
         Time.timeScale = 1;
         isGamePaused = false;
     }
+
+    /*private void TakeDamage(ClickController clickController) // changed
+    {
+        health -= 10;
+
+        if (health <= 0)
+            Debug.Log("I'm dead now! :(");
+    }
+    */
+
 
 }

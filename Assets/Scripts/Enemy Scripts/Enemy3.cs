@@ -9,20 +9,29 @@ public class Enemy3 : MonoBehaviour
     [SerializeField]
     private int timeUntilBoost = 5;
 
+    private bool playerKilled;
+
     private GameObject player = null;
     private PlayerController playerController = null;
 
     private int time = 0;
+    private int currentTime = 0;
     private int boostMultiplier = 5;
 
     [SerializeField]
-    private int kamikazeDamage = 100;
+    private int kamikazeDamage = 50;
+
+    public ParticleSystem explosion;
+
+    public delegate void EnemyDeathExp3();
+    public static event EnemyDeathExp3 EnemyExp3;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
+        playerKilled = true;
     }
 
     // Update is called once per frame
@@ -30,28 +39,43 @@ public class Enemy3 : MonoBehaviour
     {
         time = Mathf.RoundToInt(Time.time);
 
-        if (timeUntilBoost == 0)
+        currentTime -= time;
+
+        if (timeUntilBoost <= 0)
         {
-            
+            timeUntilBoost = 5;
             speedBoost();
         }
         
     }
 
-    private void kamikaze()
-    { 
-        
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerController.HandleHealth(kamikazeDamage);
+            Destroy(gameObject);
+            playerKilled = false;
+        }
     }
+
+
 
     private void speedBoost()
     {
 
         GetComponent<NavMeshAgent>().speed *= boostMultiplier;
-        boostTime -= Time.deltaTime;
+        boostTime -= time;
         Debug.Log("Boost activated!");
 
     }
 
-
+    private void OnDestroy()
+    {
+        if (playerKilled == true)
+        {
+            EnemyExp3.Invoke();
+        }
+    }
 }
 
