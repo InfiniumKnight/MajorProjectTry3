@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        movePlayer();
+        //movePlayer(); this in update and fixed update disables update and probably also fixed update
         //UpdateHealthUI();
     }
 
@@ -144,6 +144,6 @@ public class PlayerController : MonoBehaviour
     private void CoinCounter() 
     {
         coinAmount++;
-        Debug.Log(coinAmount);
     }
+
 }

@@ -1,27 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy3 : MonoBehaviour
 {
-    [SerializeField]
-    private float boostTime = 2f;
-
-    [SerializeField]
-    private int timeUntilBoost = 5;
-
     private bool playerKilled;
+    private bool canBoost = true;
 
     private GameObject player = null;
     private PlayerController playerController = null;
 
-    private int time = 0;
-    private int currentTime = 0;
+    [SerializeField]
     private int boostMultiplier = 5;
 
     [SerializeField]
     private int kamikazeDamage = 50;
 
-    public ParticleSystem explosion;
+    [SerializeField]
+    private int boostLength = 2;
+
+    private float originalSpeed;
+
+    public GameObject explosion;
 
     public delegate void EnemyDeathExp3();
     public static event EnemyDeathExp3 EnemyExp3;
@@ -32,21 +32,16 @@ public class Enemy3 : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         playerKilled = true;
+        originalSpeed = GetComponent<NavMeshAgent>().speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time = Mathf.RoundToInt(Time.time);
-
-        currentTime -= time;
-
-        if (timeUntilBoost <= 0)
+        if(canBoost == true)
         {
-            timeUntilBoost = 5;
-            speedBoost();
+            Invoke("SpeedBoost", 0);
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,18 +51,15 @@ public class Enemy3 : MonoBehaviour
             playerController.HandleHealth(kamikazeDamage);
             Destroy(gameObject);
             playerKilled = false;
+            Instantiate(explosion, transform.position, explosion.transform.rotation);
         }
     }
 
-
-
-    private void speedBoost()
+    private void SpeedBoost()
     {
-
         GetComponent<NavMeshAgent>().speed *= boostMultiplier;
-        boostTime -= time;
         Debug.Log("Boost activated!");
-
+        Invoke("BoostTime", boostLength);
     }
 
     private void OnDestroy()
@@ -77,5 +69,17 @@ public class Enemy3 : MonoBehaviour
             EnemyExp3.Invoke();
         }
     }
+
+    private void BoostTime()
+    {
+        GetComponent<NavMeshAgent>().speed = originalSpeed;
+        Invoke("CanEnemyBoost", 2);
+    }
+
+    private void CanEnemyBoost()
+    {
+        canBoost = true;
+    }
+
 }
 

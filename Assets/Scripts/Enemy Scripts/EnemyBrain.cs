@@ -12,6 +12,7 @@ public class EnemyBrain : MonoBehaviour
     public int enemyDamage = 10; //Setting up enemy damage
     public int enemyMaxHealth = 30;
     private int enemyHealth;
+    private int coinDrop = 20; // odds of coins dropping from enemies
 
     [SerializeField]
     private GameObject coin;
@@ -28,8 +29,6 @@ public class EnemyBrain : MonoBehaviour
     private void Update()
     {
         agent.SetDestination(player.transform.position); //Updates the players position every frame, allows for tracking
-        
-        EnemyHealthHandler(1);
     }
 
     //Allows enemy to take damage, also has a 5% drop rate for coins
@@ -39,7 +38,7 @@ public class EnemyBrain : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
-            if ((Random.Range(0, 20)) == 1)
+            if ((Random.Range(0, coinDrop)) == 1)
             {
                 Instantiate(coin, transform.position, coin.transform.rotation);
             }

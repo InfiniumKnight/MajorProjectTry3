@@ -94,6 +94,7 @@ public class LevelSystem : MonoBehaviour
     private void Exp3()
     {
         currentXP = currentXP + 50;
+        Debug.Log("Enemy 3 exp");
     }
 
 

@@ -188,3 +188,4 @@ MonoBehaviour:
   boostTime: 2
   timeUntilBoost: 5
   kamikazeDamage: 50
+  explosion: {fileID: 4287253187301737877, guid: 305b5ca631e4c3a49aaf104d70eeffdf, type: 3}
