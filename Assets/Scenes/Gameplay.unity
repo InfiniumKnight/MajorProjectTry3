@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: SwordLevel
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 470817837641306721, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2667104767130943242, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: m_Name
       value: Alien Assassin
@@ -873,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8188814615950156671, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8188814615950156671, guid: 7e3452fccc0beb34a819914fa955cb07, type: 3}
       propertyPath: m_LocalPosition.z
