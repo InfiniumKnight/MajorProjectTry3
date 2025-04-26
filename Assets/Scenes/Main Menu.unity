@@ -302,6 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 894121564}
+  - component: {fileID: 894121565}
   m_Layer: 5
   m_Name: TitleScreenPanel
   m_TagString: Untagged
@@ -328,6 +329,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &894121565
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894121563}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &987190852
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,13 +350,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 987190853}
+  - component: {fileID: 987190854}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &987190853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -363,6 +377,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &987190854
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987190852}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1049352416
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +512,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a734f01d065b6b42a6081cfbfdd7966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleScreenPanel: {fileID: 894121563}
-  mainMenuPanel: {fileID: 987190852}
+  titleScreenGroup: {fileID: 894121565}
+  mainMenuGroup: {fileID: 987190854}
+  transitionTime: 1
 --- !u!4 &1352001162
 Transform:
   m_ObjectHideFlags: 0
