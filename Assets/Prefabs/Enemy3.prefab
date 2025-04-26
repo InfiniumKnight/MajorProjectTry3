@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5321e79e2c37ae4418fa03aa115bc4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostTime: 2
-  timeUntilBoost: 5
+  boostMultiplier: 2
   kamikazeDamage: 50
+  boostLength: 2
   explosion: {fileID: 4287253187301737877, guid: 305b5ca631e4c3a49aaf104d70eeffdf, type: 3}
