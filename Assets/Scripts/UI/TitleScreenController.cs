@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class TitleScreenController : MonoBehaviour
 {
-    public GameObject titleScreenPanel;
-    public GameObject mainMenuPanel;
+    public CanvasGroup titleScreenGroup;
+    public CanvasGroup mainMenuGroup;
+    public float transitionTime = 1.0f;
 
     private bool hasPressedEnter = false;
+    private UIFader fader;
+
+    private void Start()
+    {
+        fader = gameObject.AddComponent<UIFader>();
+    }
 
     private void Update()
     {
         if (!hasPressedEnter && Input.GetKeyDown(KeyCode.Return))
         {
             hasPressedEnter = true;
-            titleScreenPanel.SetActive(false);
-            mainMenuPanel.SetActive(true);
+            StartCoroutine(TransitionToMainMenu());
         }
+    }
+
+    private IEnumerator TransitionToMainMenu()
+    {
+        yield return StartCoroutine(fader.FadeCanvasGroup(titleScreenGroup, 1f, 0f, transitionTime));
+        yield return StartCoroutine(fader.FadeCanvasGroup(mainMenuGroup, 0f, 1f, transitionTime));
     }
 }
