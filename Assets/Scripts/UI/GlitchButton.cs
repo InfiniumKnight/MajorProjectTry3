@@ -19,6 +19,6 @@ public class GlitchButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Idle
+        animator.SetTrigger("Glitch");
     }
 }
