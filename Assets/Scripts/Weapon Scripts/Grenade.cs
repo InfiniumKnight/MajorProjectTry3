@@ -19,7 +19,10 @@ public class Grenade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GrenadeLevel = player.GetComponent<PlayerController>().BombLevel;
+        if (Characterselected.TankSelected)
+        {
+            GrenadeLevel = 1;
+        }
     }
 
     // Update is called once per frame

@@ -21,7 +21,10 @@ public class Pistol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PistolLevel = player.GetComponent<PlayerController>().GunLevel;
+        if (Characterselected.AlienSelected)
+        {
+            PistolLevel = 1;
+        }
     }
 
     // Update is called once per frame

@@ -16,7 +16,11 @@ public class Sword : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SwordLevel = player.GetComponent<PlayerController>().SwordLevel;
+        if (Characterselected.TankSelected)
+        {
+            SwordLevel = 1;
+        }
+
         hitBox.SetActive(false);
     }
 

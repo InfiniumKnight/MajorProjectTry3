@@ -7,12 +7,19 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    public float Speed = 3.0f; //Walking speed
+    public float Speed; //Walking speed
     private Vector2 move;
 
+    //aniamtors and models
     [SerializeField] private Animator animator;
+    [SerializeField] private Animator AlienAnimator;
+    [SerializeField] private Animator RobotAnimator;
+    [SerializeField] private Animator TankAnimator;
+    [SerializeField] private GameObject AlienModel;
+    [SerializeField] private GameObject RobotModel;
+    [SerializeField] private GameObject TankModel;
 
-    public float health = 100f; //Max health
+    public float health; //Max health
     private float currentHealth; //Current player health
     public Slider healthBar; //Setting up health bar UI
     public float chipSpeed = 2.0f;
@@ -20,11 +27,6 @@ public class PlayerController : MonoBehaviour
 
     public Image frontHealthBar;
     public Image backHealthBar;
-
-    [Header("Weapon Levels")]
-    [SerializeField] public int SwordLevel;
-    [SerializeField] public int GunLevel;
-    [SerializeField] public int BombLevel;
 
     public delegate void PlayerEventHandler();
     public event PlayerEventHandler OnPlayerDeath;
@@ -50,6 +52,28 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     { 
+      //sets animatior, model, and stats based on selected character
+        if (Characterselected.AlienSelected)
+        {
+            AlienModel.SetActive(true);
+            animator = AlienAnimator;
+            health = 50;
+            Speed = 6f;
+        }
+        else if (Characterselected.RobotSelected)
+        {
+            RobotModel.SetActive(true);
+            animator = RobotAnimator;
+            health = 75;
+            Speed = 4f;
+        }
+        else if (Characterselected.TankSelected)
+        {
+            TankModel.SetActive(true);
+            animator = TankAnimator;
+            health = 100;
+            Speed = 2f;
+        }
         currentHealth = health; //Initalize player health
     }
 
@@ -104,6 +128,7 @@ public class PlayerController : MonoBehaviour
     private void PlayerDie()
     {
         Debug.Log("Player has died!");
+        animator.SetBool("isDead", true);
         OnPlayerDeath?.Invoke();
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
     }
