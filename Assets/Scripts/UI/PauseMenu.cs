@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (GameIsPaused)
             {
@@ -41,21 +41,26 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void MainMenu()
+    public void OnMainMenuClicked()
     {
-        //SceneManager.LoadScene(0);
+        DataPersistenceManager.instance.SaveGame();
         Time.timeScale = 1f;
-    }
-
-    public void ExitGame()
-    {
-        Debug.Log("quitting");
-        Application.Quit();
+        GameIsPaused = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.instance.LoadLevel("Main Menu");
     }
 
     public void OnSaveGameClicked()
     {
         DataPersistenceManager.instance.SaveGame();
+    }
+
+    public void OnExitGameClicked()
+    {
+        DataPersistenceManager.instance.SaveGame();
+        Debug.Log("Closing Application");
+        Application.Quit();
     }
 
 }
