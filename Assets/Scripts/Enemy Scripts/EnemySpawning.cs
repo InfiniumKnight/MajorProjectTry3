@@ -14,11 +14,12 @@ public class EnemySpawning : MonoBehaviour
 
     private int[] enemyExperience = { 100, 75, 50 }; //Finish setting up randomization of drops
 
-    private bool isGamePaused = false;
     public GameObject enemy1;
     public GameObject enemy2;
     public GameObject enemy3;
+    public GameObject boss;
     private int[] randomSpawnRadius = { -10, -9, -8, -7, -6, -5, 5, 6, 7, 8, 9, 10 };
+    private int[] bossSpawnRadius = { -15, -14, -13, -12, -11, -10, 10, 11, 12, 13, 14, 15 };
 
     [SerializeField] private GameObject player;
     [SerializeField] public Camera playerCam;
@@ -26,6 +27,7 @@ public class EnemySpawning : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        Invoke("BossSpawner", 2);
     }
 
     // Update is called once per frame
@@ -35,20 +37,7 @@ public class EnemySpawning : MonoBehaviour
 
         enemySpawnage();
 
-        spawnRateIncrease();
-
-        // These if statements pause and unpause the game, which stops time and total time, which allows for accurate time taking of how long the player is actually playing the game
-        if (Input.GetKeyDown(KeyCode.P) && isGamePaused == false)
-        {
-            pauseGame();
-            Debug.Log("Game is paused!");
-        }
-        if (Input.GetKeyDown(KeyCode.U) && isGamePaused == true)
-        {
-            resumeGame();
-            Debug.Log("Game is resumed!");
-        }       
-        
+        spawnRateIncrease();   
     }
 
     //Spawns in enemies, with it spawning 1 more enemy1 every 10 seconds, enemy2 every 20 and enemy3 every 30
@@ -108,18 +97,14 @@ public class EnemySpawning : MonoBehaviour
         gameLength = Mathf.RoundToInt(Time.time - startTime);
     }
 
-    // Pauses the game by setting time scale to 0
-    private void pauseGame()
+    private void BossComingSoon()
     {
-        Time.timeScale = 0;
-        isGamePaused = true;
+        Invoke("BossSpawner", 2);
     }
 
-    //Resumes the game by setting time scale back to 1
-    private void resumeGame()
+    private void BossSpawner()
     {
-        Time.timeScale = 1;
-        isGamePaused = false;
+        Instantiate(boss, new Vector3(bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)], 0, bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)]), Quaternion.identity);
     }
 
     /*private void TakeDamage(ClickController clickController) // changed
