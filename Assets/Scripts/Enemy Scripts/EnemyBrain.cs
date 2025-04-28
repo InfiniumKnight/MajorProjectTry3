@@ -7,7 +7,7 @@ public class EnemyBrain : MonoBehaviour
 
     //Sets up the enemy to find the player and be able to damage them
     private GameObject player = null;
-    private PlayerController playerController = null; 
+    private PlayerController playerController = null;
 
     public int enemyDamage = 10; //Setting up enemy damage
     public int enemyMaxHealth = 30;

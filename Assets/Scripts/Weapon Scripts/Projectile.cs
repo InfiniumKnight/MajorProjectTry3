@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
     }
     }
 
-    void triggerEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy")
         {

@@ -7,7 +7,7 @@ public class GrenadeExplosion : MonoBehaviour
     //public GameObject explosionEffect; for later once we have an effect we want to use.
 
     public float explosionForce = 5f;//hoping to create the effect of enemies getting slightly pushed by the explosion
-    public float radius = 300;//setting it high for testing, can be changed later.
+    public float radius = 75;//setting it high for testing, can be changed later.
 
     public  float delay = .5f;
     public int damage = 15;//thinking low damage since its an area attack

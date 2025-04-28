@@ -9,6 +9,8 @@ public class Enemy2 : MonoBehaviour
     public delegate void EnemyDeathExp2();
     public static event EnemyDeathExp2 EnemyExp2;
 
+    public GameObject spawner;
+
     public NavMeshAgent enemy2;
 
     public Transform player;
@@ -18,7 +20,11 @@ public class Enemy2 : MonoBehaviour
     public float enemy2Speed;
 
     Vector3 dest;
-
+    private void Start()
+    {
+        spawner = GameObject.FindGameObjectWithTag("Ground");
+        playerCam = spawner.GetComponent<EnemySpawning>().playerCam;
+    }
     void Update()
     {
         //Calculate the player's Camera's frustum planes

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Characterselected : MonoBehaviour
 {
-    public static bool AlienSelected = false;
+    public static bool AlienSelected = true;
     public static bool RobotSelected = false;
-    public static bool TankSelected = true;
+    public static bool TankSelected = false;
     public static bool HasSelected = false;
 
     public void SelectAlien()

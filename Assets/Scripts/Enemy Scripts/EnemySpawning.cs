@@ -13,7 +13,6 @@ public class EnemySpawning : MonoBehaviour
     private int enemySpawnRate = 0;
 
     private int[] enemyExperience = { 100, 75, 50 }; //Finish setting up randomization of drops
-    private int[] enemyCoin = { 100, 75, 50 };
 
     private bool isGamePaused = false;
     public GameObject enemy1;
@@ -21,11 +20,8 @@ public class EnemySpawning : MonoBehaviour
     public GameObject enemy3;
     private int[] randomSpawnRadius = { -10, -9, -8, -7, -6, -5, 5, 6, 7, 8, 9, 10 };
 
-    [SerializeField]
-    private GameObject player;
-
-
-
+    [SerializeField] private GameObject player;
+    [SerializeField] public Camera playerCam;
     // Start is called before the first frame update
     void Start()
     {

@@ -128,7 +128,9 @@ public class PlayerController : MonoBehaviour
     private void PlayerDie()
     {
         Debug.Log("Player has died!");
-        animator.SetBool("isDead", true);
+        AlienModel.SetActive(false);
+        RobotModel.SetActive(false);
+        TankModel.SetActive(false);
         OnPlayerDeath?.Invoke();
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
     }
