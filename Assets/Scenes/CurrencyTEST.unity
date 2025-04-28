@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 338848967}
   - component: {fileID: 338848966}
   m_Layer: 5
-  m_Name: Character1
+  m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 640799828}
   - component: {fileID: 640799827}
   m_Layer: 5
-  m_Name: Character3
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2195,7 +2195,7 @@ GameObject:
   - component: {fileID: 965355273}
   - component: {fileID: 965355272}
   m_Layer: 5
-  m_Name: Character2
+  m_Name: Alien
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2294,24 +2294,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableCharacters:
-  - characterId: bot
-    characterName: RobotChar
+  - characterId: Robot
+    characterName: Robot
     price: 500
     characterPrefab: {fileID: 0}
     purchaseButton: {fileID: 1326597923}
     priceText: {fileID: 659094511}
     lockedOverlay: {fileID: 1959096885}
     unlockedIndicator: {fileID: 1728643973}
-  - characterId: alien
-    characterName: AlienChar
+  - characterId: Alien
+    characterName: Alien
     price: 1000
     characterPrefab: {fileID: 0}
     purchaseButton: {fileID: 1959529910}
     priceText: {fileID: 770407825}
     lockedOverlay: {fileID: 666417754}
     unlockedIndicator: {fileID: 33231010}
-  - characterId: alien
-    characterName: AlienChar
+  - characterId: Alien
+    characterName: Alien
     price: 1500
     characterPrefab: {fileID: 0}
     purchaseButton: {fileID: 133252331}
@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9c7420bdb40c646a97c86fb507a2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: 
+  fileName: game_save.json
 --- !u!4 &1240545398
 Transform:
   m_ObjectHideFlags: 0
@@ -3553,6 +3553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1884911652}
   - component: {fileID: 1884911651}
+  - component: {fileID: 1884911653}
   m_Layer: 0
   m_Name: CreditManager
   m_TagString: Untagged
@@ -3588,6 +3589,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1884911653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884911650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df6b66a46806ee4890df54d39b469fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1959096885
 GameObject:
   m_ObjectHideFlags: 0
