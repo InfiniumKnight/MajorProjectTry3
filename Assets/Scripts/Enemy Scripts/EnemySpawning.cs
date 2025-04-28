@@ -27,7 +27,7 @@ public class EnemySpawning : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-        Invoke("BossSpawner", 2);
+        Invoke("BossSpawner", 300);
     }
 
     // Update is called once per frame
@@ -95,11 +95,6 @@ public class EnemySpawning : MonoBehaviour
     private void totalTime()
     {
         gameLength = Mathf.RoundToInt(Time.time - startTime);
-    }
-
-    private void BossComingSoon()
-    {
-        Invoke("BossSpawner", 2);
     }
 
     private void BossSpawner()

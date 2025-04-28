@@ -25,6 +25,11 @@ public class EnemyBrain : MonoBehaviour
 
     private void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         agent.SetDestination(player.transform.position); //Updates the players position every frame, allows for tracking
     }
 

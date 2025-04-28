@@ -34,9 +34,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 30}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2898594171219262123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2787908481166728444
@@ -174,6 +175,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6171872699490345292, guid: 00fb06dc8aef98b4ea15e2dc4ebdef69, type: 3}
+  attackSpeed: 5
+  timeSinceAttack: 0
+  damage: 20
+  bulletSpawn: {fileID: 2898594171219262123}
+  Target: {fileID: 8188814615950156671, guid: 52b4e62c549e03e4f876b3a00e39d846, type: 3}
 --- !u!114 &7151574054774575474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 30
   enemyMaxHealth: 200
-  coin: {fileID: 973028809628856185, guid: 3a5b57a5cc3048b4783d4acaf331c031, type: 3}
 --- !u!82 &4852001486014991166
 AudioSource:
   m_ObjectHideFlags: 0
@@ -285,3 +290,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &7951766178388411480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2898594171219262123}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2898594171219262123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951766178388411480}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.8}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6271030760911675391}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
