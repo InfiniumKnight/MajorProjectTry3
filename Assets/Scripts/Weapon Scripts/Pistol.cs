@@ -17,6 +17,7 @@ public class Pistol : MonoBehaviour
 
     public GameObject projectilePrefab;
     public GameObject player;
+    public GameObject LevelUpScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class Pistol : MonoBehaviour
 
         if (PistolLevel >= 1)
         {
-            if (Target == null)
+            if (Target == null || Vector3.Distance(Target.transform.position, player.transform.position) > 8f)
             {
                 FindTarget();
             }
@@ -66,6 +67,10 @@ public class Pistol : MonoBehaviour
     {
         PistolLevel += 1;
         attackSpeed -= attackSpeed * .15f;
+        LevelUpScreen.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void FindTarget()

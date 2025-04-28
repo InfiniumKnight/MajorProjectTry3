@@ -15,6 +15,7 @@ public class Grenade : MonoBehaviour
     //object assignments
     public GameObject grenadePrefab;
     public GameObject player;
+    public GameObject LevelUpScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,7 @@ public class Grenade : MonoBehaviour
     private void Attack()
     {
         //finds a random spot around the player to drop the grenade
-        Vector3 randomSpawnPostion = new Vector3(grenade.transform.position.x + Random.Range(-10, 11), 5, grenade.transform.position.z +Random.Range(-10,11));
+        Vector3 randomSpawnPostion = new Vector3(grenade.transform.position.x + Random.Range(-5, 6), 5, grenade.transform.position.z +Random.Range(-5,6));
         //spawns grenade
         Instantiate(grenadePrefab, randomSpawnPostion, Quaternion.identity);
         timeSinceAttack = 0;
@@ -55,6 +56,10 @@ public class Grenade : MonoBehaviour
     {
         GrenadeLevel += 1;
         attackSpeed -= attackSpeed * .15f;
+        LevelUpScreen.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     

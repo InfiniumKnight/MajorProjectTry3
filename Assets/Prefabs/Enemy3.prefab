@@ -171,8 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 0
-  enemyMaxHealth: 30
-  coin: {fileID: 973028809628856185, guid: 3a5b57a5cc3048b4783d4acaf331c031, type: 3}
+  enemyMaxHealth: 50
 --- !u!114 &8451321367751039790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostMultiplier: 2
-  kamikazeDamage: 50
+  kamikazeDamage: 25
   boostLength: 5
   explosion: {fileID: 4287253187301737877, guid: 305b5ca631e4c3a49aaf104d70eeffdf, type: 3}
