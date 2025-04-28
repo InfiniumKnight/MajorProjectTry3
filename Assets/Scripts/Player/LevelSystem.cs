@@ -40,8 +40,8 @@ public class LevelSystem : MonoBehaviour
     private void Start()
     {
         LevelUpScreen.SetActive(false);
-        frontXPBar.fillAmount = currentXP / requiredXP;
-        backXPBar.fillAmount = currentXP / requiredXP;
+        //frontXPBar.fillAmount = currentXP / requiredXP;
+        //backXPBar.fillAmount = currentXP / requiredXP;
         healAmount = player.gameObject.GetComponent<PlayerController>().health;
     }
 
