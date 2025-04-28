@@ -38,40 +38,31 @@ public class PlayerController : MonoBehaviour
         move = context.ReadValue<Vector2>();
     }
 
-    //Subscribes the player to the coin counter event when placed in the level
-    private void Awake()
-    {
-        Coin.Coined += CoinCounter;
-    }
-
-    //Unsubscribes the player to the coin counter event when killed or scene changes
-    private void OnDestroy()
-    {
-        Coin.Coined -= CoinCounter;
-    }
-
     private void Start()
-    { 
-      //sets animatior, model, and stats based on selected character
+    {
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //sets animatior, model, and stats based on selected character
         if (Characterselected.AlienSelected)
         {
             AlienModel.SetActive(true);
             animator = AlienAnimator;
-            health = 50;
+            health = 50f;
             Speed = 6f;
         }
         else if (Characterselected.RobotSelected)
         {
             RobotModel.SetActive(true);
             animator = RobotAnimator;
-            health = 75;
+            health = 75f;
             Speed = 4f;
         }
         else if (Characterselected.TankSelected)
         {
             TankModel.SetActive(true);
             animator = TankAnimator;
-            health = 100;
+            health = 100f;
             Speed = 2f;
         }
         currentHealth = health; //Initalize player health
@@ -165,12 +156,6 @@ public class PlayerController : MonoBehaviour
         currentHealth += healAmount;
         lerpTimer = 0f;
         currentHealth = health;
-    }
-
-    //Adds a coin to the players amount
-    private void CoinCounter() 
-    {
-        coinAmount++;
     }
 
 }

@@ -14,9 +14,6 @@ public class EnemyBrain : MonoBehaviour
     private int enemyHealth;
     private int coinDrop = 20; // odds of coins dropping from enemies
 
-    [SerializeField]
-    private GameObject coin;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,7 +37,7 @@ public class EnemyBrain : MonoBehaviour
         {
             if ((Random.Range(0, coinDrop)) == 1)
             {
-                Instantiate(coin, transform.position, coin.transform.rotation);
+                ;
             }
             Destroy(gameObject);
         }

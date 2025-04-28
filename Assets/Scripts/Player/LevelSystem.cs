@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
-    public int level;
-    public float currentXP;
-    public float requiredXP;
+    public int level = 1;
+    public float currentXP = 0;
+    public float requiredXP = 10f;
 
     private float lerpTimer;
     private float delayTimer;
@@ -15,6 +15,7 @@ public class LevelSystem : MonoBehaviour
     [Header("UI")]
     public Image frontXPBar;
     public Image backXPBar;
+    public GameObject LevelUpScreen;
 
     public GameObject player;
 
@@ -38,14 +39,16 @@ public class LevelSystem : MonoBehaviour
 
     private void Start()
     {
+        LevelUpScreen.SetActive(false);
         frontXPBar.fillAmount = currentXP / requiredXP;
         backXPBar.fillAmount = currentXP / requiredXP;
+        healAmount = player.gameObject.GetComponent<PlayerController>().health;
     }
 
     private void Update()
     {
-        UpdateXPUI();
-        if (currentXP > requiredXP)
+        //UpdateXPUI();
+        if (currentXP >= requiredXP)
             LevelUp();
     }
 
@@ -74,21 +77,28 @@ public class LevelSystem : MonoBehaviour
 
     public void LevelUp()
     {
+        
+        LevelUpScreen.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         level++;
-        frontXPBar.fillAmount = 0f;
-        backXPBar.fillAmount = 0f;
+        //frontXPBar.fillAmount = 0f;
+        //backXPBar.fillAmount = 0f;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
         player.GetComponent<PlayerController>().RestoreHealth(healAmount);
+        requiredXP += 10f;
+
     }
 
     private void Exp1()
     {
-        currentXP = currentXP + 10;
+        currentXP = currentXP + 5;
     }
 
     private void Exp2()
     {
-        currentXP = currentXP + 20;
+        currentXP = currentXP + 10;
     }
 
     private void Exp3()
