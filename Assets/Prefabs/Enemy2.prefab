@@ -171,8 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 0
-  enemyHealth: 30
-  experience: {fileID: 538868787171105893, guid: 204ace12e2e29ec48bb004f8cdbb9895, type: 3}
+  enemyMaxHealth: 30
   coin: {fileID: 973028809628856185, guid: 3a5b57a5cc3048b4783d4acaf331c031, type: 3}
 --- !u!114 &7079300320316333615
 MonoBehaviour:
@@ -186,3 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02a3e90afcc7ea458e13eeb179957f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy2: {fileID: 6039444936746069343}
+  player: {fileID: 0}
+  playerCam: {fileID: 0}
+  enemy2Speed: 0
