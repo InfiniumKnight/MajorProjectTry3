@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class Enemy3 : MonoBehaviour
 {
     private bool playerKilled;
-    private bool canBoost = true;
 
     private GameObject player = null;
     private PlayerController playerController = null;
@@ -37,11 +36,8 @@ public class Enemy3 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(canBoost == true)
-        {
+    { 
             Invoke("SpeedBoost", 0);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -73,12 +69,14 @@ public class Enemy3 : MonoBehaviour
     private void BoostTime()
     {
         GetComponent<NavMeshAgent>().speed = originalSpeed;
-        Invoke("CanEnemyBoost", 2);
+        Invoke("EnemyMissed", 0);
     }
 
-    private void CanEnemyBoost()
+    private void EnemyMissed()
     {
-        canBoost = true;
+        Destroy(gameObject);
+        playerKilled = false;
+        Instantiate(explosion, transform.position, explosion.transform.rotation);
     }
 
 }
