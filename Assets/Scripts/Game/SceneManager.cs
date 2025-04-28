@@ -10,7 +10,10 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     public static SceneManager instance;
 
     public int credits = 0;
-    public List<string> players = new List<string>();
+    public bool AlienUnlocked;
+    public bool TankUnlocked;
+
+    public string selectedCharacter;
 
     private void OnDisable()
     {
@@ -43,8 +46,6 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     public void NewGame()
     {
         credits = 0;
-        players.Clear();
-        players.Add("RobotChar");
         SaveGame();
     }
 
@@ -58,14 +59,18 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         if (data != null)
         {
             credits = data.credits;
-            players = data.playersUnlocked;
+            AlienUnlocked = data.AlienUnlocked;
+            TankUnlocked = data.TankUnlocked;
+            selectedCharacter = data.selectedCharacter;
         }
     }
 
     public void SaveData(ref GameData data)
     {
         data.credits = credits;
-        data.playersUnlocked = players;
+        data.AlienUnlocked = AlienUnlocked;
+        data.TankUnlocked = TankUnlocked;
+        data.selectedCharacter = selectedCharacter;
     }
 
     public void LoadLevel(string sceneName)

@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
 
     public int coinAmount = 0; // Sets the coin amount of the player to 0
 
+    public GameObject robotModel;
+    public GameObject alienModel;
+    public GameObject tankModel;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
@@ -40,30 +44,41 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        string selectedCharacter = SceneManager.instance.selectedCharacter;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //sets animatior, model, and stats based on selected character
-        if (Characterselected.AlienSelected)
+        switch (selectedCharacter)
         {
-            AlienModel.SetActive(true);
-            animator = AlienAnimator;
-            health = 50f;
-            Speed = 6f;
-        }
-        else if (Characterselected.RobotSelected)
-        {
-            RobotModel.SetActive(true);
-            animator = RobotAnimator;
-            health = 75f;
-            Speed = 4f;
-        }
-        else if (Characterselected.TankSelected)
-        {
-            TankModel.SetActive(true);
-            animator = TankAnimator;
-            health = 100f;
-            Speed = 2f;
+            case "RobotChar":
+                RobotModel.SetActive(true);
+                animator = RobotAnimator;
+                health = 75f;
+                Speed = 4f;
+                break;
+
+            case "AlienChar":
+                AlienModel.SetActive(true);
+                animator = AlienAnimator;
+                health = 50f;
+                Speed = 6f;
+                break;
+
+            case "TankChar":
+                TankModel.SetActive(true);
+                animator = TankAnimator;
+                health = 100f;
+                Speed = 2f;
+                break;
+
+            default:
+                Debug.LogWarning("No character selected. Defaulting to Robot");
+                RobotModel.SetActive(true);
+                animator = RobotAnimator;
+                health = 75f;
+                Speed = 4f;
+                break;
         }
         currentHealth = health; //Initalize player health
     }
