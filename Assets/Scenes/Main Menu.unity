@@ -1729,12 +1729,17 @@ PrefabInstance:
     - target: {fileID: 4701962458062153277, guid: e09839f3e0906ef4789d6a741946406a, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: dc43eb80be02e5942b608c386a041217, type: 3}
+      objectReference: {fileID: 8300000, guid: d4bd0a2b42dee5f4b8ceee61ba2d42e3, type: 3}
     - target: {fileID: 7308337362558029498, guid: e09839f3e0906ef4789d6a741946406a, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7308337362558029498, guid: e09839f3e0906ef4789d6a741946406a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2387218138446019440, guid: e09839f3e0906ef4789d6a741946406a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
