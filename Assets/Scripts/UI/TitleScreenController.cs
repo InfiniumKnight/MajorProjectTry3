@@ -14,6 +14,10 @@ public class TitleScreenController : MonoBehaviour
     private void Start()
     {
         fader = gameObject.AddComponent<UIFader>();
+
+        mainMenuGroup.alpha = 0f;
+        mainMenuGroup.interactable = false;
+        mainMenuGroup.blocksRaycasts = false;
     }
 
     private void Update()
@@ -28,6 +32,12 @@ public class TitleScreenController : MonoBehaviour
     private IEnumerator TransitionToMainMenu()
     {
         yield return StartCoroutine(fader.FadeCanvasGroup(titleScreenGroup, 1f, 0f, transitionTime));
+
+        mainMenuGroup.gameObject.SetActive(true);
+
         yield return StartCoroutine(fader.FadeCanvasGroup(mainMenuGroup, 0f, 1f, transitionTime));
+
+        mainMenuGroup.interactable = true;
+        mainMenuGroup.blocksRaycasts = true;
     }
 }

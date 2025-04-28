@@ -6,7 +6,7 @@ using System.Linq;
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
-    [SerializeField] private string fileName;
+    [SerializeField] private string fileName = "gameData.json";
 
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
@@ -33,6 +33,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+        SaveGame();
     }
 
     public void LoadGame()

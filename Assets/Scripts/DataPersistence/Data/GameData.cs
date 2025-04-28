@@ -15,6 +15,7 @@ public class GameData
     public GameData()
     {
         this.credits = 0;
-        this.players = new List<string>(); //3 players (0-2)
+        this.players = new List<string> { "RobotChar", "AlienChar", "TankChar" };
+        this.playersUnlocked = new List<string> { "RobotChar" };
     }
 }

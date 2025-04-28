@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GlitchButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class GlitchButton : MonoBehaviour, IPointerEnterHandler
 {
     private Animator animator;
 
@@ -14,11 +14,7 @@ public class GlitchButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        animator.SetTrigger("Glitch");
+        animator.SetTrigger("PlayGlitch");
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        animator.SetTrigger("Glitch");
-    }
 }

@@ -14,7 +14,7 @@ public class SceneManager : MonoBehaviour, IDataPersistence
 
     private void OnDisable()
     {
-        Debug.Log("");
+        Debug.Log("SceneManager disabled");
 
     }
     private void Awake()
@@ -27,23 +27,8 @@ public class SceneManager : MonoBehaviour, IDataPersistence
 
         else
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
-    }
-    public void LoadNextScene(string sceneName)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-    }
-
-    public void LoadLevel(string sceneName)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("The game has closed");
     }
 
     private void Update()
@@ -55,14 +40,43 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void NewGame()
+    {
+        credits = 0;
+        players.Clear();
+        players.Add("RobotChar");
+        SaveGame();
+    }
+
+    public void SaveGame()
+    {
+        DataPersistenceManager.instance.SaveGame();
+    }
+
     public void LoadData(GameData data)
     {
-        players = new List<string>(data.players ?? new List<string>());
+        if (data != null)
+        {
+            credits = data.credits;
+            players = data.playersUnlocked;
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-        data.players = new List<string>(players);
+        data.credits = credits;
+        data.playersUnlocked = players;
+    }
+
+    public void LoadLevel(string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("The game has closed");
     }
 
     public void CompleteLevel()

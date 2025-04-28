@@ -7,12 +7,13 @@ public class MainMenu : MonoBehaviour
     public void OnLoadGameClicked()
     {
         DataPersistenceManager.instance.LoadGame();
+        SceneManager.instance.LoadLevel("CharacterSelection");
     }
 
     public void OnNewGameClicked()
     {
-        SceneManager.instance.players.Clear();
         DataPersistenceManager.instance.NewGame();
+        SceneManager.instance.LoadLevel("CharacterSelection");
     }
 
     public void ShowCredits()
