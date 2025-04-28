@@ -31,7 +31,7 @@ public class EnemyBoss : MonoBehaviour
             }
             else
             {
-                bulletSpawn.transform.LookAt(Target);
+                bulletSpawn.transform.LookAt(Target.position + (Vector3.up), Vector3.up);
             }
 
             if (timeSinceAttack >= attackSpeed)
