@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator AlienAnimator;
     [SerializeField] private Animator RobotAnimator;
     [SerializeField] private Animator TankAnimator;
-    [SerializeField] private GameObject AlienModel;
-    [SerializeField] private GameObject RobotModel;
-    [SerializeField] private GameObject TankModel;
+    public GameObject robotModel;
+    public GameObject alienModel;
+    public GameObject tankModel;
 
     public float health; //Max health
     private float currentHealth; //Current player health
@@ -32,10 +32,7 @@ public class PlayerController : MonoBehaviour
     public event PlayerEventHandler OnPlayerDeath;
 
     public int coinAmount = 0; // Sets the coin amount of the player to 0
-
-    public GameObject robotModel;
-    public GameObject alienModel;
-    public GameObject tankModel;
+    
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -44,44 +41,32 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GameStatsManager.instance.StartGame();
-
-        string selectedCharacter = SceneManager.instance.selectedCharacter;
+        //GameStatsManager.instance.StartGame();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //sets animatior, model, and stats based on selected character
-        switch (selectedCharacter)
-        {
-            case "RobotChar":
-                RobotModel.SetActive(true);
-                animator = RobotAnimator;
-                health = 75f;
-                Speed = 4f;
-                break;
 
-            case "AlienChar":
-                AlienModel.SetActive(true);
-                animator = AlienAnimator;
-                health = 50f;
-                Speed = 6f;
-                break;
-
-            case "TankChar":
-                TankModel.SetActive(true);
-                animator = TankAnimator;
-                health = 100f;
-                Speed = 2f;
-                break;
-
-            default:
-                Debug.LogWarning("No character selected. Defaulting to Robot");
-                RobotModel.SetActive(true);
-                animator = RobotAnimator;
-                health = 75f;
-                Speed = 4f;
-                break;
+        if (Characterselected.RobotSelected) {
+            robotModel.SetActive(true);
+            animator = RobotAnimator;
+            health = 75f;
+            Speed = 4f;
         }
+        else if (Characterselected.AlienSelected) {
+            alienModel.SetActive(true);
+            animator = AlienAnimator;
+            health = 50f;
+            Speed = 6f;
+        }
+
+        else if (Characterselected.TankSelected) {
+            tankModel.SetActive(true);
+            animator = TankAnimator;
+            health = 100f;
+            Speed = 2f;
+        }
+        
         currentHealth = health; //Initalize player health
     }
 
@@ -136,9 +121,9 @@ public class PlayerController : MonoBehaviour
     private void PlayerDie()
     {
         Debug.Log("Player has died!");
-        AlienModel.SetActive(false);
-        RobotModel.SetActive(false);
-        TankModel.SetActive(false);
+        alienModel.SetActive(false);
+        robotModel.SetActive(false);
+        tankModel.SetActive(false);
         OnPlayerDeath?.Invoke();
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
 

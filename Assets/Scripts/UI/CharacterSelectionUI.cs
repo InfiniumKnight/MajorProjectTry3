@@ -99,6 +99,9 @@ public class CharacterSelectionUI : MonoBehaviour
 
     public void OnPlayGameClicked()
     {
-        SceneManager.instance.LoadLevel("GamePlay");
+        if (Characterselected.HasSelected)
+        {
+            SceneManager.instance.LoadLevel("GamePlay");
+        }
     }
 }

@@ -206,18 +206,15 @@ MonoBehaviour:
   AlienAnimator: {fileID: 4566492501728892127}
   RobotAnimator: {fileID: 455822488517897485}
   TankAnimator: {fileID: 7316302191224947388}
-  AlienModel: {fileID: 7130478885434856479}
-  RobotModel: {fileID: 1970736410393714785}
-  TankModel: {fileID: 8706620702757101322}
+  robotModel: {fileID: 1970736410393714785}
+  alienModel: {fileID: 7130478885434856479}
+  tankModel: {fileID: 8706620702757101322}
   health: 100
   healthBar: {fileID: 0}
   chipSpeed: 2
   frontHealthBar: {fileID: 0}
   backHealthBar: {fileID: 0}
   coinAmount: 0
-  robotModel: {fileID: 1970736410393714785}
-  alienModel: {fileID: 7130478885434856479}
-  tankModel: {fileID: 8706620702757101322}
 --- !u!114 &5576015587354247518
 MonoBehaviour:
   m_ObjectHideFlags: 0
