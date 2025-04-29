@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrenadeExplosion : MonoBehaviour
 {
-    //public GameObject explosionEffect; for later once we have an effect we want to use.
+    public GameObject explosionEffect;
 
     public float explosionForce = 5f;//hoping to create the effect of enemies getting slightly pushed by the explosion
     public float radius = 1f;//setting it high for testing, can be changed later.
@@ -32,12 +32,12 @@ public class GrenadeExplosion : MonoBehaviour
                 }
             }
 
-            //Instantiate(explosionEffect, transform.position, transform.rotation); spawns the effect once we have one.
+            Instantiate(explosionEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         catch
         {
-            //Instantiate(explosionEffect, transform.position, transform.rotation); spawns the effect once we have one.
+            Instantiate(explosionEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 

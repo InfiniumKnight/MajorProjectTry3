@@ -734,6 +734,7 @@ GameObject:
   - component: {fileID: 1524538379}
   - component: {fileID: 1524538378}
   - component: {fileID: 1524538381}
+  - component: {fileID: 1524538382}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -830,6 +831,18 @@ MonoBehaviour:
   resultText: {fileID: 1805355166}
   timeText: {fileID: 766974648}
   playerLevelText: {fileID: 1913757636}
+--- !u!114 &1524538382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524538377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca4224031b29ef429fa7631e8683f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1805355164
 GameObject:
   m_ObjectHideFlags: 0
