@@ -39,6 +39,17 @@ public class LevelSystem : MonoBehaviour
 
     private void Start()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player == null)
+            {
+                Debug.LogError("LevelSystem could not find Player");
+                return;
+            }
+        }
+
         LevelUpScreen.SetActive(false);
         //frontXPBar.fillAmount = currentXP / requiredXP;
         //backXPBar.fillAmount = currentXP / requiredXP;
