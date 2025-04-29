@@ -87,6 +87,8 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     public void EndGame(bool playerWon)
     {
         GameStatsManager.instance.EndGame(playerWon);
+        credits += 1;
+        SaveGame();
         LoadLevel("StatsMenu"); // After completing the level show what player collected
     }
 }

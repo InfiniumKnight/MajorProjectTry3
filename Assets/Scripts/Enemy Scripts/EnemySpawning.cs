@@ -25,7 +25,6 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] public Camera playerCam;
 
     private GameObject spawnedBoss;
-    private bool bossDefeated = false;
 
     // Start is called before the first frame update
     void Start()
