@@ -9,19 +9,19 @@ public class Characterselected : MonoBehaviour
     public static bool TankSelected = false;
     public static bool HasSelected = false;
 
-    public static void SelectAlien()
+    public void SelectAlien()
     {
         AlienSelected = true;
         HasSelected = true;
     }
 
-    public static void SelectRobot()
+    public void SelectRobot()
     {
         RobotSelected = true;
         HasSelected = true;
     }
 
-    public static void SelectTank()
+    public void SelectTank()
     {
         TankSelected = true;
         HasSelected = true;

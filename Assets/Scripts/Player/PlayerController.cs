@@ -47,20 +47,20 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         //sets animatior, model, and stats based on selected character
 
-        if (Characterselected.RobotSelected) {
+        if (Characterselected.RobotSelected == true) {
             robotModel.SetActive(true);
             animator = RobotAnimator;
             health = 75f;
             Speed = 4f;
         }
-        else if (Characterselected.AlienSelected) {
+        else if (Characterselected.AlienSelected == true) {
             alienModel.SetActive(true);
             animator = AlienAnimator;
             health = 50f;
             Speed = 6f;
         }
 
-        else if (Characterselected.TankSelected) {
+        else if (Characterselected.TankSelected == true) {
             tankModel.SetActive(true);
             animator = TankAnimator;
             health = 100f;

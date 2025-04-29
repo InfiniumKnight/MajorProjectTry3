@@ -17,6 +17,8 @@ public class CharacterSelectionUI : MonoBehaviour
     public Button tankSelectButton;
     public Button tankUnlockButton;
 
+    public GameObject characterSelected;
+
     public TMP_Text creditsText;
 
     void Start()
@@ -84,17 +86,17 @@ public class CharacterSelectionUI : MonoBehaviour
 
     public void SelectRobot()
     {
-        Characterselected.SelectRobot();
+        characterSelected.GetComponent<Characterselected>().SelectRobot();
     }
 
     public void SelectAlien()
     {
-        Characterselected.SelectAlien();
+        characterSelected.GetComponent<Characterselected>().SelectAlien();
     }
 
     public void SelectTank()
     {
-        Characterselected.SelectTank();
+        characterSelected.GetComponent<Characterselected>().SelectTank();
     }
 
     public void OnPlayGameClicked()
