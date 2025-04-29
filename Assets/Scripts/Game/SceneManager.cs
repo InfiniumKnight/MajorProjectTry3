@@ -84,8 +84,9 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         Debug.Log("The game has closed");
     }
 
-    public void CompleteLevel()
+    public void EndGame(bool playerWon)
     {
-        LoadLevel("EndStats"); // After completing the level show what player collected
+        GameStatsManager.instance.EndGame(playerWon);
+        LoadLevel("StatsMenu"); // After completing the level show what player collected
     }
 }

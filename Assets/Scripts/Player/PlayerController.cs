@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameStatsManager.instance.StartGame();
+
         string selectedCharacter = SceneManager.instance.selectedCharacter;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -139,6 +141,8 @@ public class PlayerController : MonoBehaviour
         TankModel.SetActive(false);
         OnPlayerDeath?.Invoke();
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
+
+        SceneManager.instance.EndGame(false); //Opposite is placed where we handle when the player wins!
     }
 
     private void UpdateHealthUI()

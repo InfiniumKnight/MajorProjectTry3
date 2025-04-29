@@ -23,6 +23,10 @@ public class EnemySpawning : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] public Camera playerCam;
+
+    private GameObject spawnedBoss;
+    private bool bossDefeated = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,7 +103,19 @@ public class EnemySpawning : MonoBehaviour
 
     private void BossSpawner()
     {
-        Instantiate(boss, new Vector3(bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)], 0, bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)]), Quaternion.identity);
+        Vector3 spawnPos = new Vector3(
+        bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)],
+        0,
+        bossSpawnRadius[Random.Range(0, bossSpawnRadius.Length)]
+        );
+
+        GameObject bossInstance = Instantiate(boss, spawnPos, Quaternion.identity);
+
+        EnemyBrain brain = bossInstance.GetComponent<EnemyBrain>();
+        if (brain != null)
+        {
+            brain.isBoss = true; // Mark as boss so SceneManager triggers win when it dies
+        }
     }
 
     /*private void TakeDamage(ClickController clickController) // changed

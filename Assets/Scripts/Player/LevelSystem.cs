@@ -82,7 +82,10 @@ public class LevelSystem : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
         level++;
+        GameStatsManager.instance.UpdatePlayerLevel(level);
+
         //frontXPBar.fillAmount = 0f;
         //backXPBar.fillAmount = 0f;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);

@@ -14,6 +14,8 @@ public class EnemyBrain : MonoBehaviour
     private int enemyHealth;
     private int coinDrop = 20; // odds of coins dropping from enemies
 
+    public bool isBoss = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,8 +44,15 @@ public class EnemyBrain : MonoBehaviour
         {
             if ((Random.Range(0, coinDrop)) == 1)
             {
-                ;
+                //optional to spawn coin
             }
+
+            if (isBoss)
+            {
+                Debug.Log("Boss defeated. Triggering win");
+                SceneManager.instance.EndGame(true);
+            }
+
             Destroy(gameObject);
         }
 
