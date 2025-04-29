@@ -47,7 +47,7 @@ public class LevelSystem : MonoBehaviour
 
     private void Update()
     {
-        //UpdateXPUI();
+        UpdateXPUI();
         if (currentXP >= requiredXP)
             LevelUp();
     }
@@ -56,16 +56,24 @@ public class LevelSystem : MonoBehaviour
     {
         float xpFraction = currentXP / requiredXP;
         float FXP = frontXPBar.fillAmount;
+
         if (FXP > xpFraction)
         {
             delayTimer += Time.deltaTime;
             backXPBar.fillAmount = xpFraction;
+
             if (delayTimer > 3)
             {
                 lerpTimer += Time.deltaTime;
                 float percentComplete = lerpTimer / 4;
+                percentComplete = Mathf.Min(1, percentComplete);
                 frontXPBar.fillAmount = Mathf.Lerp(FXP, backXPBar.fillAmount, percentComplete);
             }
+        }
+
+        if (lerpTimer >= 1)
+        {
+            delayTimer = 0f;
         }
     }
 
@@ -90,6 +98,7 @@ public class LevelSystem : MonoBehaviour
         //backXPBar.fillAmount = 0f;
         currentXP = Mathf.RoundToInt(currentXP - requiredXP);
         player.GetComponent<PlayerController>().RestoreHealth(healAmount);
+
         requiredXP += 10f;
 
     }

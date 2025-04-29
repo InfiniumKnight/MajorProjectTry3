@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //movePlayer(); this in update and fixed update disables update and probably also fixed update
-        //UpdateHealthUI();
+        UpdateHealthUI();
     }
 
     private void FixedUpdate()
@@ -167,6 +167,11 @@ public class PlayerController : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete = percentComplete * percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
+        }
+
+        if (lerpTimer > chipSpeed)
+        {
+            lerpTimer = 0f;
         }
     }
 
