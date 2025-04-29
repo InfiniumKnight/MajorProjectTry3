@@ -33,7 +33,16 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void NewGame()
     {
+        dataHandler.Delete();
+
         this.gameData = new GameData();
+
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        {
+            dataPersistenceObj.LoadData(gameData);
+        }
+
         SaveGame();
     }
 
