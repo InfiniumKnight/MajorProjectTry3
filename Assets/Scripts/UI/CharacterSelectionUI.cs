@@ -82,11 +82,19 @@ public class CharacterSelectionUI : MonoBehaviour
         }
     }
 
-    public void SelectCharacter(string characterName)
+    public void SelectRobot()
     {
-        SceneManager.instance.selectedCharacter = characterName;
-        SceneManager.instance.SaveGame();
-        SceneManager.instance.LoadLevel("Gameplay");
+        Characterselected.SelectRobot();
+    }
+
+    public void SelectAlien()
+    {
+        Characterselected.SelectAlien();
+    }
+
+    public void SelectTank()
+    {
+        Characterselected.SelectTank();
     }
 
     public void OnPlayGameClicked()

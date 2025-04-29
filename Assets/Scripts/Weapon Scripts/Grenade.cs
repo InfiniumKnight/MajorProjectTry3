@@ -20,7 +20,7 @@ public class Grenade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Characterselected.TankSelected)
+        if (Characterselected.RobotSelected)
         {
             GrenadeLevel = 1;
         }
