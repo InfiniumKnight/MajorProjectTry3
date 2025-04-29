@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     private PlayerController playerController = null;
 
     [SerializeField]
-    private int bulletDamage = 50;
+    private int bulletDamage = 25;
 
     public GameObject explosion;
 

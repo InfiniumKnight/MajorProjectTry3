@@ -30,7 +30,7 @@ public class EnemySpawning : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-        Invoke("BossSpawner", 300);
+        Invoke("BossSpawner", 120);
     }
 
     // Update is called once per frame

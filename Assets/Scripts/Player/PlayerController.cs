@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameData gameData;
 
     public float Speed; //Walking speed
     private Vector2 move;
@@ -15,9 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator AlienAnimator;
     [SerializeField] private Animator RobotAnimator;
     [SerializeField] private Animator TankAnimator;
-    public GameObject robotModel;
-    public GameObject alienModel;
-    public GameObject tankModel;
+    [SerializeField] private GameObject alienModel;
+    [SerializeField] private GameObject robotModel;
+    [SerializeField] private GameObject tankModel;
 
     public float health; //Max health
     private float currentHealth; //Current player health
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
     public event PlayerEventHandler OnPlayerDeath;
 
     public int coinAmount = 0; // Sets the coin amount of the player to 0
-    
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -41,33 +41,54 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //GameStatsManager.instance.StartGame();
+        GameStatsManager.instance.StartGame();
+
+        string selectedCharacter = SceneManager.instance.selectedCharacter;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //sets animatior, model, and stats based on selected character
+        switch (selectedCharacter)
+        {
+            case "RobotChar":
+                robotModel.SetActive(true);
+                animator = RobotAnimator;
+                health = 75f;
+                Speed = 4f;
+                break;
 
-        if (Characterselected.RobotSelected == true) {
-            robotModel.SetActive(true);
-            animator = RobotAnimator;
-            health = 75f;
-            Speed = 4f;
-        }
-        else if (Characterselected.AlienSelected == true) {
-            alienModel.SetActive(true);
-            animator = AlienAnimator;
-            health = 50f;
-            Speed = 6f;
-        }
+            case "AlienChar":
+                alienModel.SetActive(true);
+                animator = AlienAnimator;
+                health = 50f;
+                Speed = 6f;
+                break;
 
-        else if (Characterselected.TankSelected == true) {
-            tankModel.SetActive(true);
-            animator = TankAnimator;
-            health = 100f;
-            Speed = 2f;
+            case "TankChar":
+                tankModel.SetActive(true);
+                animator = TankAnimator;
+                health = 100f;
+                Speed = 2f;
+                break;
+
+            default:
+                Debug.LogWarning("No character selected. Defaulting to Robot.");
+                robotModel.SetActive(true);
+                animator = RobotAnimator;
+                health = 75f;
+                Speed = 4f;
+                break;
         }
-        
         currentHealth = health; //Initalize player health
+
+        if (SceneManager.instance == null)
+        {
+            Debug.LogError("SceneManager is null in PlayerController");
+        }
+        else
+        {
+            Debug.Log("SceneManager.character = " + SceneManager.instance.selectedCharacter);
+        }
     }
 
     private void Update()
@@ -121,13 +142,20 @@ public class PlayerController : MonoBehaviour
     private void PlayerDie()
     {
         Debug.Log("Player has died!");
+
+        // Deactivate all models instantly
         alienModel.SetActive(false);
         robotModel.SetActive(false);
         tankModel.SetActive(false);
-        OnPlayerDeath?.Invoke();
-        //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
 
-        SceneManager.instance.EndGame(false); //Opposite is placed where we handle when the player wins!
+        gameData.credits += 1;
+
+        // Optional: disable player input/movement if needed
+        this.enabled = false;
+
+        OnPlayerDeath?.Invoke();
+
+        SceneManager.instance.EndGame(false); // Trigger endgame and scene transition
     }
 
     private void UpdateHealthUI()

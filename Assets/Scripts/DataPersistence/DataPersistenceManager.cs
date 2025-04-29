@@ -89,4 +89,12 @@ public class DataPersistenceManager : MonoBehaviour
 
         return new List<IDataPersistence>(dataPersistenceObjects);
     }
+
+    public void RegisterPersistentObject(IDataPersistence dataPersistenceObj)
+    {
+        if (!dataPersistenceObjects.Contains(dataPersistenceObj))
+        {
+            dataPersistenceObjects.Add(dataPersistenceObj);
+        }
+    }
 }

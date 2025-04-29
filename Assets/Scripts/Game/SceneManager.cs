@@ -31,6 +31,12 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         else
         {
             Destroy(gameObject);
+            return;
+        }
+
+        if (DataPersistenceManager.instance == null)
+        {
+            DataPersistenceManager.instance.RegisterPersistentObject(this);
         }
     }
 
@@ -61,7 +67,6 @@ public class SceneManager : MonoBehaviour, IDataPersistence
             credits = data.credits;
             AlienUnlocked = data.AlienUnlocked;
             TankUnlocked = data.TankUnlocked;
-            selectedCharacter = data.selectedCharacter;
         }
     }
 
@@ -70,7 +75,6 @@ public class SceneManager : MonoBehaviour, IDataPersistence
         data.credits = credits;
         data.AlienUnlocked = AlienUnlocked;
         data.TankUnlocked = TankUnlocked;
-        data.selectedCharacter = selectedCharacter;
     }
 
     public void LoadLevel(string sceneName)
@@ -88,7 +92,14 @@ public class SceneManager : MonoBehaviour, IDataPersistence
     {
         GameStatsManager.instance.EndGame(playerWon);
         credits += 1;
-        SaveGame();
-        LoadLevel("StatsMenu"); // After completing the level show what player collected
+
+        SaveGame(); // Immediately saves current credit and game data
+        LoadLevel("StatsMenu"); // Load next scene right away
+    }
+
+    private IEnumerator LoadAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        LoadLevel(sceneName);
     }
 }

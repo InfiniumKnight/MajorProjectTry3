@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 public class CharacterSelectionUI : MonoBehaviour
 {
     [Header("Robot UI Elements")]
-    public Button robotSelectButton; //always available
+    public Button robotSelectButton;
 
     [Header("Alien UI Elements")]
     public Button alienSelectButton;
@@ -17,12 +16,11 @@ public class CharacterSelectionUI : MonoBehaviour
     public Button tankSelectButton;
     public Button tankUnlockButton;
 
-    public GameObject characterSelected;
-
     public TMP_Text creditsText;
 
-    void Start()
+    private void Start()
     {
+        // Fallback if no character is selected yet
         if (string.IsNullOrEmpty(SceneManager.instance.selectedCharacter))
         {
             SceneManager.instance.selectedCharacter = "RobotChar";
@@ -34,15 +32,15 @@ public class CharacterSelectionUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        //Robot is always unlocked
+        // Robot is always unlocked
         robotSelectButton.gameObject.SetActive(true);
 
-        //Alien
+        // Alien
         bool alienUnlocked = SceneManager.instance.AlienUnlocked;
         alienSelectButton.gameObject.SetActive(alienUnlocked);
         alienUnlockButton.gameObject.SetActive(!alienUnlocked);
 
-        //Tank
+        // Tank
         bool tankUnlocked = SceneManager.instance.TankUnlocked;
         tankSelectButton.gameObject.SetActive(tankUnlocked);
         tankUnlockButton.gameObject.SetActive(!tankUnlocked);
@@ -60,7 +58,6 @@ public class CharacterSelectionUI : MonoBehaviour
             SceneManager.instance.SaveGame();
             Debug.Log("Alien unlocked");
         }
-
         else
         {
             Debug.Log("Not enough credits or already unlocked");
@@ -77,33 +74,28 @@ public class CharacterSelectionUI : MonoBehaviour
             SceneManager.instance.SaveGame();
             Debug.Log("Tank unlocked");
         }
-
         else
         {
             Debug.Log("Not enough credits or already unlocked");
         }
     }
 
-    public void SelectRobot()
+    public void SelectCharacter(string characterName)
     {
-        characterSelected.GetComponent<Characterselected>().SelectRobot();
-    }
-
-    public void SelectAlien()
-    {
-        characterSelected.GetComponent<Characterselected>().SelectAlien();
-    }
-
-    public void SelectTank()
-    {
-        characterSelected.GetComponent<Characterselected>().SelectTank();
+        SceneManager.instance.selectedCharacter = characterName;
+        SceneManager.instance.SaveGame();
+        Debug.Log("Selected character: " + characterName);
     }
 
     public void OnPlayGameClicked()
     {
-        if (Characterselected.HasSelected)
+        if (!string.IsNullOrEmpty(SceneManager.instance.selectedCharacter))
         {
             SceneManager.instance.LoadLevel("GamePlay");
+        }
+        else
+        {
+            Debug.LogWarning("No character selected!");
         }
     }
 }
